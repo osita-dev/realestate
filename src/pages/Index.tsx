@@ -34,17 +34,24 @@ export default function Index() {
               to build when the market cannot deliver.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-              <Button asChild size="lg" className="gap-2">
-                <Link to="/find">
-                  <Search className="h-5 w-5" />
-                  Find My Dream Home
-                </Link>
+              <Button asChild size="lg" variant="secondary">
+                <Link to="/find">Find My Dream Home</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="gap-2">
-                <Link to="/build">
-                  <Hammer className="h-5 w-5" />
-                  Build My Dream Home
-                </Link>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              >
+                <Link to="/build">Build instead</Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              >
+                <Link to="/agent-login">For Agents & Developers</Link>
               </Button>
             </div>
           </div>

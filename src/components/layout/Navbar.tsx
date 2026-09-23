@@ -1,12 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Heart, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Home, Heart, Menu, X, LayoutDashboard } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getCurrentUser } from "@/lib/auth";
 
 export function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(getCurrentUser());
+
+  useEffect(() => {
+    setUser(getCurrentUser());
+  }, [location.pathname]);
 
   const links = [
     { to: "/", label: "Home" },
@@ -31,7 +37,8 @@ export function Navbar() {
               to={l.to}
               className={cn(
                 "px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                location.pathname === l.to || (l.to !== "/" && location.pathname.startsWith(l.to))
+                location.pathname === l.to ||
+                  (l.to !== "/" && location.pathname.startsWith(l.to))
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted"
               )}
@@ -42,6 +49,19 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {user ? (
+            <Button asChild variant="outline" size="sm" className="hidden md:inline-flex gap-1">
+              <Link to="/dashboard">
+                <LayoutDashboard className="h-4 w-4" />
+                Dashboard
+              </Link>
+            </Button>
+          ) : (
+            <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+              <Link to="/agent-login">For Agents</Link>
+            </Button>
+          )}
+
           <Button asChild variant="ghost" size="icon" className="md:hidden">
             <Link to="/saved">
               <Heart className="h-5 w-5" />
@@ -78,6 +98,23 @@ export function Navbar() {
               {l.label}
             </Link>
           ))}
+          {user ? (
+            <Link
+              to="/dashboard"
+              onClick={() => setOpen(false)}
+              className="block px-3 py-2 text-sm font-medium rounded-md text-primary"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              to="/agent-login"
+              onClick={() => setOpen(false)}
+              className="block px-3 py-2 text-sm font-medium rounded-md text-muted-foreground"
+            >
+              For Agents & Developers
+            </Link>
+          )}
         </div>
       )}
     </header>

@@ -13,6 +13,9 @@ import Search from "./pages/Search";
 import Saved from "./pages/Saved";
 import Build from "./pages/Build";
 import BuildSpec from "./pages/BuildSpec";
+import AgentLogin from "./pages/AgentLogin";
+import Dashboard from "./pages/Dashboard";
+import AddListing from "./pages/AddListing";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/saved" element={<Saved />} />
           <Route path="/build" element={<Build />} />
           <Route path="/build/spec" element={<BuildSpec />} />
+          <Route path="/agent-login" element={<AgentLogin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/add" element={<AddListing />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
