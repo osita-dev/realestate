@@ -109,7 +109,7 @@ export function matchProperties(requirements: UserRequirements): MatchResult[] {
     const missing: string[] = [];
     const partial: string[] = [];
     let score = 0;
-    const maxScore = 100;
+    const _maxScore = 100;
 
     // Location (25 pts)
     const locMatch =
